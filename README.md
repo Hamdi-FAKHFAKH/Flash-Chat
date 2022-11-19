@@ -1,16 +1,16 @@
-# chat_flash
-
-A new Flutter project.
-
+# Flash Chat
+![icons8-flash-on-100](https://user-images.githubusercontent.com/98355331/202874291-e602a971-5581-4b50-b28f-30030cdae1ea.png)
 ## Getting Started
+#### To clone the project locally on your machine, copy the URL of this repo and run the following command :
+git clone https://github.com/Hamdi-FAKHFAKH/Flash-Chat.git
+## Technologies used
+* FLUTTER
+## Don't forget to star repo 😊😉
+## Demo : 
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+https://user-images.githubusercontent.com/98355331/202816518-d1e714a9-2406-4acc-8f76-982117dbca16.mp4
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
