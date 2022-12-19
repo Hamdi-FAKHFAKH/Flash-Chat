@@ -14,6 +14,7 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen>
     with SingleTickerProviderStateMixin {
+  /* creation d'instance de fireAuth */
   final _auth = FirebaseAuth.instance;
   String email = '';
   String psd = '';
@@ -24,6 +25,12 @@ class _LoginScreenState extends State<LoginScreen>
   bool spinner = false;
   @override
   void initState() {
+    // vsync => muniteur
+    // controller =>  valeur varie entre 0 et 1
+    // upperBound Max ( ou lieu de 1)
+    // lowerBound min ( ou lieu de 0)
+    // animation => methode de variation de valeur de controller
+    // forward => lancer l'animation
     controller = AnimationController(
         vsync: this, duration: Duration(seconds: 1), lowerBound: 0.6);
     animation = CurvedAnimation(parent: controller, curve: Curves.easeIn);
@@ -33,11 +40,13 @@ class _LoginScreenState extends State<LoginScreen>
     //     ColorTween(begin: Colors.lightBlueAccent, end: Colors.indigo.shade500)
     //         .animate(controller);
 
+    // permet de faire reload after change de valeur de controller
     controller.addListener(() {
       setState(() {});
     });
   }
 
+// pour arreter l'animation avant le destroy de widget
   @override
   void dispose() {
     super.dispose();
@@ -49,6 +58,7 @@ class _LoginScreenState extends State<LoginScreen>
     return Scaffold(
       //backgroundColor: animation.value,
       backgroundColor: Colors.indigo.shade500,
+      // Spinner
       body: ModalProgressHUD(
         inAsyncCall: spinner,
         child: Padding(
@@ -58,6 +68,7 @@ class _LoginScreenState extends State<LoginScreen>
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Flexible(
+                // animlation importer from pub.dev
                 child: Hero(
                   tag: 'logo',
                   child: Container(
@@ -69,6 +80,7 @@ class _LoginScreenState extends State<LoginScreen>
               SizedBox(
                 height: 20.0,
               ),
+              // widget personaliser importer a partie de folder components
               InputText(
                 obs_text: false,
                 OnChange: (value) {

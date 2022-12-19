@@ -4,6 +4,7 @@ import 'package:flash_chat/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+/* creation d'instance de fire Store database*/
 final _firestore = FirebaseFirestore.instance;
 User loggedInUser;
 
@@ -14,6 +15,7 @@ class ChatScreen extends StatefulWidget {
 }
 
 class _ChatScreenState extends State<ChatScreen> {
+  // le champ de texte met à jour la valeur et le contrôleur notifie ses écouteurs.
   final messageTextController = TextEditingController();
   final _auth = FirebaseAuth.instance;
 
@@ -28,6 +30,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void getCurrentUser() async {
     try {
+      // récuperer le user connecter
       final user = await _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
@@ -46,6 +49,7 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
               icon: Icon(Icons.close),
               onPressed: () {
+                //Fait la deconnexion
                 _auth.signOut();
                 Navigator.pop(context);
               }),
@@ -76,6 +80,7 @@ class _ChatScreenState extends State<ChatScreen> {
                   FlatButton(
                     onPressed: () {
                       messageTextController.clear();
+                      /* save data in database */
                       _firestore.collection('messages').add({
                         'text': messageText,
                         'sender': loggedInUser.email,
@@ -100,10 +105,13 @@ class _ChatScreenState extends State<ChatScreen> {
 class MessagesStream extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    /* lire les données de base de donnée en stream */
     return StreamBuilder<QuerySnapshot>(
       stream: _firestore.collection('messages').orderBy('date').snapshots(),
       builder: (context, snapshot) {
+        //verifier l'existance de données dans le base de données
         if (!snapshot.hasData) {
+          // Spinner
           return Center(
             child: CircularProgressIndicator(
               backgroundColor: Colors.lightBlueAccent,
@@ -118,6 +126,7 @@ class MessagesStream extends StatelessWidget {
           //   children: messageBubbles,
           // ),
           child: ListView.builder(
+            // flex-end des items de listview
             reverse: true,
             itemBuilder: (context, index) {
               final docs = snapshot.data.docs.reversed;
@@ -131,6 +140,7 @@ class MessagesStream extends StatelessWidget {
                 isMe: currentUser == messageSender,
               );
             },
+            // defin le nombre de item dans listview
             itemCount: snapshot.data.docs.length,
           ),
         );

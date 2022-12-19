@@ -13,7 +13,6 @@ class WelcomeScreen extends StatefulWidget {
 }
 
 class _WelcomeScreenState extends State<WelcomeScreen> {
-  bool spinner = true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -33,6 +32,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
                     height: 60.0,
                   ),
                 ),
+                // animation importer a partir pub.dev
                 TypewriterAnimatedTextKit(
                   text: ['Flash Chat'],
                   textStyle: TextStyle(
@@ -68,9 +68,7 @@ class _WelcomeScreenState extends State<WelcomeScreen> {
   void initState() {
     Firebase.initializeApp().whenComplete(() {
       print("completed");
-      setState(() {
-        spinner = false;
-      });
+      setState(() {});
     });
   }
 }
