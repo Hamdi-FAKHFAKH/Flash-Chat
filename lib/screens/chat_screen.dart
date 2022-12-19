@@ -30,7 +30,7 @@ class _ChatScreenState extends State<ChatScreen> {
 
   void getCurrentUser() async {
     try {
-      // récuperer le user connecter
+      // récuperer l'utilisateur connecter
       final user = await _auth.currentUser;
       if (user != null) {
         loggedInUser = user;
